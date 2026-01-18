@@ -1,0 +1,2 @@
+﻿"device_id,sequence,uptime,temperature,humidity,pressure,iaq,iaq_accuracy,iaq_label,static_iaq,co2_ppm,voc_ppm,gas_percent,stabilized,run_in_complete,rssi,snr,timestamp"
+"41225,0,6,20.98,71.62,1.005,50,0,good,50,500,0.49,0,true,false,-107,5,2026-01-18T18:22:13.540528"
