@@ -14,9 +14,9 @@
 #include <WiFi.h>
 
 // --- CONFIGURATION ---
-const char *WIFI_SSID = "IITP-WiFi";
-const char *WIFI_PASS = "";
-const char *API_ENDPOINT = "http://192.170.9.119:5000/api/sensor";
+const char *WIFI_SSID = "TP-Link_F765";
+const char *WIFI_PASS = "nottplink";
+const char *API_ENDPOINT = "http://192.168.50.101:5000/api/sensor";
 // ---------------------
 
 #define BAUD 115200
