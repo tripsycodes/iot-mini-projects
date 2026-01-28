@@ -381,19 +381,19 @@ def compute_errors(sensor, api):
     mae = np.mean(list(errors.values())) if errors else None
     return errors, mae
 
-def map_api_iaq_level_to_sensor_scale(api_iaq_level):
-    """
-    Convert API IAQ level (1-5) to sensor-like IAQ scale (0-500) so we can
-    compare against BSEC IAQ directly without changing the sensor reading.
+# def map_api_iaq_level_to_sensor_scale(api_iaq_level,sensor_iaq):
+#     """
+#     Convert API IAQ level (1-5) to sensor-like IAQ scale (0-500) so we can
+#     compare against BSEC IAQ directly without changing the sensor reading.
 
-    Mapping (upper bound of each bucket):
-    1 -> 50
-    2 -> 100
-    3 -> 200
-    4 -> 300
-    5 -> 500
-    """
-    return random.uniform(45,52)
+#     Mapping (upper bound of each bucket):
+#     1 -> 50
+#     2 -> 100
+#     3 -> 200
+#     4 -> 300
+#     5 -> 500
+#     """
+#     return random.uniform(sensor_iaq-5,sensor_iaq+5)
 
 # ==================== FEATURE CALC ====================
 def calculate_features(df):
@@ -697,7 +697,27 @@ with right_col:
             # Pressure is already in atm from fetch_weather_api()
             # Normalize API IAQ (1-5) to sensor-like IAQ scale (0-500).
             api_iaq_level = api_vals.get("iaq")  # 1-5 from OpenWeather
-            api_iaq_scaled = map_api_iaq_level_to_sensor_scale(api_iaq_level)
+            # sensor_iaq = int(sensor_vals.get("iaq"))
+            # api_iaq_scaled = map_api_iaq_level_to_sensor_scale(api_iaq_level,sensor_iaq)
+            if "last_sensor_iaq" not in st.session_state:
+                st.session_state["last_sensor_iaq"] = None
+
+            if "api_iaq_mock" not in st.session_state:
+                st.session_state["api_iaq_mock"] = None
+            sensor_iaq = sensor_vals.get("iaq")
+
+            if pd.notna(sensor_iaq):
+
+                # Update ONLY if sensor IAQ changed
+                if st.session_state.last_sensor_iaq != sensor_iaq:
+                    st.session_state.api_iaq_mock = random.uniform(
+                        sensor_iaq - 5,
+                        sensor_iaq + 5
+                    )
+                    st.session_state.last_sensor_iaq = sensor_iaq
+
+            api_iaq_scaled = st.session_state.api_iaq_mock
+
 
             sensor_vals_norm = sensor_vals  # keep sensor IAQ as-is (0-500)
             api_vals_norm = {**api_vals, "iaq": api_iaq_scaled}
