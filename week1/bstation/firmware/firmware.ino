@@ -18,9 +18,9 @@
 #include <freertos/task.h>
 
 // --- CONFIGURATION ---
-const char *WIFI_SSID = "TP-Link_F765";
-const char *WIFI_PASS = "nottplink";
-const char *API_ENDPOINT = "http://192.168.50.101:5000/api/sensor";
+const char *WIFI_SSID = "9.0 GHz";
+const char *WIFI_PASS = "notsahilraj";
+const char *API_ENDPOINT = "http://10.94.2.241:5000/api/sensor";
 const uint16_t API_QUEUE_SIZE = 50;   // Buffer up to 50 packets
 const uint16_t API_TIMEOUT_MS = 2000; // 2 second timeout
 // ---------------------
