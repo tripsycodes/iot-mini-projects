@@ -1,0 +1,18 @@
+bsec_file: bstation/data/bsec_data.csv
+analog_file: bstation/data/analog_data.csv
+
+header:
+  - temperature
+  - humidity
+  - pressure
+  - iaq
+  - co2_ppm
+  - voc_ppm
+  - mq135_raw
+  - anemometer_raw
+
+plots:
+  - temperature
+  - humidity
+  - pressure
+  - iaq
