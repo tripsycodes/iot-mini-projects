@@ -30,9 +30,7 @@ protocol).
 #include "ModbusMaster.h"
 #include <stdio.h>
 
-#define DEBUG(...)                                                             \
-  printf(__VA_ARGS__);                                                         \
-  printf("\n")
+#define DEBUG(...)                                                             
 
 /* _____GLOBAL VARIABLES_____________________________________________________ */
 
